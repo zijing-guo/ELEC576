@@ -157,15 +157,15 @@ class NeuralNetwork(object):
         '''
 
         # IMPLEMENT YOUR BACKPROP HERE
-        # num_examples = len(X)
-        # delta3 = self.probs
-        # delta3[range(num_examples), y] -= 1
-        delta3 = self.probs - np.eye(2)[y]
+        num_examples = len(X)
+        delta3 = self.probs
+        delta3[range(num_examples), y] -= 1.   # y_hat - y
+        delta2 = delta3 @ self.W2.T * self.diff_actFun(self.z1, self.actFun_type)
 
         dW2 = self.a1.T @ delta3
-        db2 = delta3
-        dW1 = delta3 @ self.W @ self.diff_actFun(self.z1, self.actFun_type) @ self.X.T
-        db1 = delta3 @ self.W @ self.diff_actFun(self.z1, self.actFun_type)
+        db2 = np.mean(delta3, axis = 0)
+        dW1 = X.T @ delta2
+        db1 = np.mean(delta2, axis = 0)
         return dW1, dW2, db1, db2
 
     def fit_model(self, X, y, epsilon=0.01, num_passes=20000, print_loss=True):
@@ -213,11 +213,12 @@ def main():
 
 
     # generate and visualize Make-Moons dataset
-    # X, y = generate_data()
+    X, y = generate_data()
     # plt.scatter(X[:, 0], X[:, 1], s=40, c=y, cmap=plt.cm.Spectral)
     # plt.show()
 
-    model = NeuralNetwork(nn_input_dim = 2, nn_hidden_dim = 3 , nn_output_dim = 2, actFun_type='tanh')
+
+    model = NeuralNetwork(nn_input_dim = 2, nn_hidden_dim = 10 , nn_output_dim = 2, actFun_type='Sigmoid')   # Tanh Sigmoid ReLU
     model.fit_model(X,y)
     model.visualize_decision_boundary(X,y)
 
