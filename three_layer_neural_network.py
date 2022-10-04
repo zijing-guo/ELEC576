@@ -48,7 +48,7 @@ class NeuralNetwork(object):
     This class builds and trains a neural network
     """
 
-    def __init__(self, nn_input_dim, nn_hidden_dim, nn_output_dim, actFun_type='tanh', reg_lambda=0.01, seed=0):
+    def __init__(self, nn_input_dim, nn_hidden_dim, nn_output_dim, actFun_type, reg_lambda=0.01, seed=0):
         '''
         :param nn_input_dim: input dimension
         :param nn_hidden_dim: the number of hidden units
@@ -211,14 +211,13 @@ class NeuralNetwork(object):
 
 def main():
 
-
     # generate and visualize Make-Moons dataset
     X, y = generate_data()
     # plt.scatter(X[:, 0], X[:, 1], s=40, c=y, cmap=plt.cm.Spectral)
     # plt.show()
 
 
-    model = NeuralNetwork(nn_input_dim = 2, nn_hidden_dim = 10 , nn_output_dim = 2, actFun_type='Sigmoid')   # Tanh Sigmoid ReLU
+    model = NeuralNetwork(nn_input_dim = 2, nn_hidden_dim = 2 , nn_output_dim = 2, actFun_type='Tanh')   # Tanh Sigmoid ReLU
     model.fit_model(X,y)
     model.visualize_decision_boundary(X,y)
 
