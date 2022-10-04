@@ -189,7 +189,7 @@ def main():
 
     # neunral network configuration
     hidden_nodes = [2, 10, 10, 10, 10, 2]
-    actFun_type = ['Sigmoid'] * (len(hidden_nodes) - 2)
+    actFun_type = ['Tanh'] * (len(hidden_nodes) - 2)
 
     # model training and result showing
     model = DeepNeuralNetwork(hidden_nodes = hidden_nodes, actFun_type = actFun_type)
