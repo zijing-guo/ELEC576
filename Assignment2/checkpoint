@@ -1,0 +1,2 @@
+model_checkpoint_path: "/Users/zijing/PycharmProjects/ELEC576/Assignment2/cifar10-best"
+all_model_checkpoint_paths: "/Users/zijing/PycharmProjects/ELEC576/Assignment2/cifar10-best"
